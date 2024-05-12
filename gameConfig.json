@@ -1,5 +1,6 @@
 {
   "title": "Game title",
+  "FPS": 60,
   "screen": {
     "width": 800,
     "height": 600

@@ -4,13 +4,15 @@
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
     ScreenSize screenSize = {800,600};
-    const char * title = "GRA PODSTAWY, PODSTWY SDL2";
+    const char * title = "GRA SDL2";
     Background background = {{10,20,20},"background.bmp"};
 
     GameConfig gameConfig = {
             screenSize,
             title,
             background,
+            60,
+            {{100, 100, 50, 50 } ,10},
             true
     };
     Game game(gameConfig);

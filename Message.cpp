@@ -1,7 +1,7 @@
 #include "Message.h"
 #include <Windows.h>
 
-std::string Message::getErrorMessage(ErrorType type) {
+std::string Message::getErrorMessage(ErrorType type) const {
     switch (type) {
         case ErrorType::INIT:
             return errorMessage.init;
@@ -16,7 +16,7 @@ std::string Message::getErrorMessage(ErrorType type) {
     }
 }
 
-[[maybe_unused]] void Message::showMessageBox(const ErrorType errorType, ErrorMessageType type) {
+[[maybe_unused]] void Message::showMessageBox(const ErrorType errorType, ErrorMessageType type) const {
 
     std::string color_message;
     switch(type) {

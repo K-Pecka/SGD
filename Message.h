@@ -16,8 +16,8 @@ enum class ErrorMessageType {MERROR,MWARNING};
 class Message {
     public:
          Message() = default;
-        [[nodiscard]]  std::string getErrorMessage(ErrorType type) ;
-        [[maybe_unused]]  void showMessageBox(ErrorType errorType, ErrorMessageType type);
+        [[nodiscard]]  std::string getErrorMessage(ErrorType type) const ;
+        [[maybe_unused]]  void showMessageBox(ErrorType errorType, ErrorMessageType type) const;
         ErrorMessage errorMessage;
     private:
 
