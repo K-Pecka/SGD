@@ -16,5 +16,7 @@ add_executable(${PROJECT_NAME} main.cpp
         GameEngine.h
         Player.cpp
         Player.h
+        GameObject.cpp
+        GameObject.h
 )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2.lib ${SDL2_LIB_DIR}/SDL2main.lib)

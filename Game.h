@@ -2,17 +2,13 @@
 #define SDL_GAME_GAME_H
 
 #include <vector>
+#include <memory>
 #include "Player.h"
+#include "GameObject.h"
 
 struct ScreenSize {
     int width = 200;
     int height = 200;
-};
-struct RGBa{
-    int red=0;
-    int green=0;
-    int blue=0;
-    int alfa=1;
 };
 struct Background{
     RGBa rgba{};
@@ -20,64 +16,37 @@ struct Background{
 };
 struct GameConfig{
     [[maybe_unused]] ScreenSize screenSize;
-    const char * title = "TITLE UNKNOW";
+    const char * title = "TITLE UNKNOWN";
     Background background;
     int FPS = 30;
     Hero player;
     bool set = false;
 
 };
-class GameObject {
-
-public:
-    explicit GameObject(Object object): x(object.x),y(object.y),width(object.w),height(object.h) {}
-
-    GameObject()=default;
-
-    int getX() const { return x; }
-    void setX(int X) { x = X; }
-
-    int getY() const { return y; }
-    void setY(int Y) { y = Y; }
-
-    int getWidth() const { return width; }
-    void setWidth(int W) { width = W; }
-
-    int getHeight() const { return height; }
-    void setHeight(int H) { height = H; }
-
-
-    [[nodiscard]] bool checkCollision(GameObject rect) const
-    {
-        return (getX() < rect.getX() + rect.getWidth() &&
-                getX() + getWidth() > rect.getX() &&
-                getY() < rect.getY() + rect.getHeight() &&
-                getY() + getHeight() > rect.getY());
-    }
-protected:
-    int x;
-    int y;
-    int width;
-    int height;
-};
 class Game {
 
     public:
         Game() = default;
-        explicit Game(const GameConfig& gameConfig) : gameConfig(gameConfig), hero(Player(gameConfig.player)){
-            addGameObject(GameObject({200, 200, 50, 50}));
-            addGameObject(GameObject({300, 300, 50, 50}));
+        explicit Game(const GameConfig& gameConfig) : gameConfig(gameConfig), hero(Player(gameConfig.player)) {
+            int minSize = 10;
+            addGameObject(GameObject({0,0,minSize,gameConfig.screenSize.height},{0,255,3,1}));
+            addGameObject(GameObject({gameConfig.screenSize.width-minSize,0,minSize,gameConfig.screenSize.height},{0,255,3,1}));
+
+            addGameObject(GameObject({0,0,gameConfig.screenSize.width,minSize},{0,255,3,1}));
+            addGameObject(GameObject({0,gameConfig.screenSize.height-minSize,gameConfig.screenSize.width,minSize},{0,255,3,1}));
+
+            addGameObject(GameObject({150,150,50,50},{10,260,30,1},true));
+            addGameObject(GameObject({200,200,50,50},{1,2,3,1},true));
+            addGameObject(GameObject({250,250,50,50},{10,260,30,1}));
         }
 
         GameConfig gameConfig;
-        Player getHero() {return hero;}
-        std::vector<GameObject> getGameObject(){return GameObjects;}
-        void addGameObject(const GameObject& gameObject) {
-            GameObjects.push_back(gameObject);
-        }
+        Player& getHero() { return hero; }
+        std::vector<GameObject>& getGameObjects() { return gameObjects; }
+        void addGameObject(const GameObject& gameObject) { gameObjects.push_back(gameObject); }
     private:
         Player hero;
-        std::vector<GameObject> GameObjects;
+        std::vector<GameObject> gameObjects;
 
 };
 

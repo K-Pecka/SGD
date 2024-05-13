@@ -30,7 +30,7 @@ private:
     Message message;
     bool runGame = true;
 
-
+    [[maybe_unused]] void renderGameObjects(const std::vector<GameObject>&);
     void createWindow(GameConfig);
     void sdlInit();
     void createRender();
@@ -38,7 +38,7 @@ private:
 
     SDL_Surface * setSurface(Background);
 
-    [[maybe_unused]] static bool checkCollisions(Player, const std::vector<GameObject>&);
+    [[maybe_unused]] static GameObject * checkCollisions(const Player&, const std::vector<GameObject>&);
 };
 
 #endif // GAME_ENGINE_H

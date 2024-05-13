@@ -64,15 +64,15 @@ void GameEngine::init() {
     setRenderBackground(game.gameConfig.background);
 }
 
-[[maybe_unused]] bool GameEngine::checkCollisions(Player player, const std::vector<GameObject>& gameObjects) {
-    GameObject playerObject = reinterpret_cast<GameObject &&>(player);
-    for (const auto& gameObject : gameObjects) {
-        if (playerObject.checkCollision(gameObject))
-        {
-            return true;
+GameObject* GameEngine::checkCollisions(const Player& player, const std::vector<GameObject>& gameObjects) {
+    const GameObject& playerObject = player;
+
+    for (const GameObject& gameObject : gameObjects) {
+        if (playerObject.checkCollision(gameObject)) {
+            return const_cast<GameObject *>(&gameObject);
         }
     }
-    return false;
+    return nullptr;
 }
 Direction GameEngine::checkDirection(SDL_Keycode key, Direction lastKey) {
     switch (key) {
@@ -88,64 +88,63 @@ Direction GameEngine::checkDirection(SDL_Keycode key, Direction lastKey) {
             return lastKey;
     }
 }
+
+void GameEngine::renderGameObjects(const std::vector<GameObject>& gameObjects) {
+    for (GameObject obj : gameObjects) {
+        obj.render(Renderer);
+    }
+}
 void GameEngine::run()
 {
     SDL_Event event;
     Uint32 frameStart;
     Uint32 frameTime;
     std::unordered_map<SDL_Keycode, bool> keys;
-
-    SDL_Rect obstacle = {400, 100, 100, 100};
     Direction lastDirection = game.getHero().getDirection();
     while (runGame) {
         frameStart = SDL_GetTicks();
+        int dx = 0, dy = 0;
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
                 runGame = false;
             } else if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
+                if(event.key.keysym.sym == SDLK_TAB)
+                {
+                    std::cout<<"TAB"<<std::endl;
+                    game.getHero().setX(500);
+                    game.getHero().setY(500);
+                }
                 keys[event.key.keysym.sym] = (event.type == SDL_KEYDOWN);
                 lastDirection = checkDirection(event.key.keysym.sym, lastDirection);
             }
         }
 
-        int dx = 0, dy = 0;
+
         if (keys[SDLK_UP]) dy -= game.getHero().getSpeed();
         if (keys[SDLK_DOWN]) dy += game.getHero().getSpeed();
         if (keys[SDLK_LEFT]) dx -= game.getHero().getSpeed();
         if (keys[SDLK_RIGHT]) dx += game.getHero().getSpeed();
 
+
         game.getHero().move(dx, dy, lastDirection);
+        if (GameObject* collisionObject = checkCollisions(game.getHero(), game.getGameObjects())) {
+            if(collisionObject->isMovable())
+            {
+                collisionObject->move(game.getHero().getDirection(),dx,dy);
+            }
+            game.getHero().selectDirectionCollision(dx,dy);
+        }
 
         SDL_RenderClear(Renderer);
         SDL_RenderCopy(Renderer, texture, nullptr, nullptr);
 
-        SDL_Rect playerRect = game.getHero().getObject();
+        SDL_Rect playerRect = {game.getHero().getX(),game.getHero().getY(),game.getHero().getWidth(),game.getHero().getHeight()};
         SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);
         SDL_RenderFillRect(Renderer, &playerRect);
 
-        SDL_SetRenderDrawColor(Renderer, 255, 0, 0, 255);
-        SDL_RenderFillRect(Renderer, &obstacle);
 
-        if (checkCollisions(game.getHero(), game.getGameObject())) {
-            switch (game.getHero().getDirection()) {
-                case Direction::LEFT:
-                    game.getHero().move(-dx, 0, Direction::RIGHT);
-                    obstacle.x+=dx+1;
-                    break;
-                case Direction::RIGHT:
-                    game.getHero().move(-dx, 0, Direction::LEFT);
-                    obstacle.x+=dx+1;
-                    break;
-                case Direction::UP:
-                    game.getHero().move(0, -dy, Direction::DOWN);
-                    obstacle.y+=dy;
-                    break;
-                case Direction::DOWN:
-                    game.getHero().move(0, -dy, Direction::UP);
-                    obstacle.y+=dy+1;
-                    break;
-            }
-        }
+        renderGameObjects(game.getGameObjects());
+
 
         SDL_RenderPresent(Renderer);
 
@@ -163,6 +162,7 @@ void GameEngine::close() {
     Window = nullptr;
     SDL_Quit();
 }
+
 
 
 

@@ -12,7 +12,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
             title,
             background,
             60,
-            {{100, 100, 50, 50 } ,10},
+            {{int(screenSize.width/2), int(screenSize.height/2), 50, 50 } ,10},
             true
     };
     Game game(gameConfig);
