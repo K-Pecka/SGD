@@ -26,17 +26,18 @@ struct GameConfig{
 class Game {
 
     public:
-        Game() = default;
+        Game() = delete;
         explicit Game(const GameConfig& gameConfig) : gameConfig(gameConfig), hero(Player(gameConfig.player)) {
-            int minSize = 10;
+            int minSize = 1;
+
             addGameObject(GameObject({0,0,minSize,gameConfig.screenSize.height},{0,255,3,1}));
             addGameObject(GameObject({gameConfig.screenSize.width-minSize,0,minSize,gameConfig.screenSize.height},{0,255,3,1}));
 
             addGameObject(GameObject({0,0,gameConfig.screenSize.width,minSize},{0,255,3,1}));
             addGameObject(GameObject({0,gameConfig.screenSize.height-minSize,gameConfig.screenSize.width,minSize},{0,255,3,1}));
 
-            addGameObject(GameObject({150,150,50,50},{10,260,30,1},true));
-            addGameObject(GameObject({200,200,50,50},{1,2,3,1},true));
+            addGameObject(GameObject({150,150,50,50},{10,260,30,1},{true},{9.8f,10}));
+            addGameObject(GameObject({200,200,50,50},{1,2,3,1},{true},{9.8f,10}));
             addGameObject(GameObject({250,250,50,50},{10,260,30,1}));
         }
 

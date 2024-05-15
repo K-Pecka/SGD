@@ -118,10 +118,10 @@ void GameEngine::run()
                 lastDirection = checkDirection(event.key.keysym.sym, lastDirection);
             }
         }
-
+        game.getHero().update();
 
         if (keys[SDLK_UP]) dy -= game.getHero().getSpeed();
-        if (keys[SDLK_DOWN]) dy += game.getHero().getSpeed();
+        //if (keys[SDLK_DOWN]) dy += game.getHero().getSpeed();
         if (keys[SDLK_LEFT]) dx -= game.getHero().getSpeed();
         if (keys[SDLK_RIGHT]) dx += game.getHero().getSpeed();
 

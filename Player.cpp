@@ -30,3 +30,8 @@ void Player::selectDirectionCollision(int dx,int dy){
 
     }
 }
+
+void Player::update(){
+//    if(setting.gravityable)
+//        game.setGravitation();
+}

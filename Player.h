@@ -16,7 +16,7 @@ struct Hero{
 
 class Player : public GameObject {
 public:
-    explicit Player(Hero hero) : GameObject( (Object) hero.player), speed(hero.speedPlayer) {};
+    explicit Player(Hero hero) : GameObject((Object) hero.player), speed(hero.speedPlayer) {};
 
     void move(int dx, int dy,Direction direction);
     [[nodiscard]] Direction getDirection() const { return direction; }
@@ -24,7 +24,7 @@ public:
     [[maybe_unused]] void setDirection(Direction directionPlayer) { this->direction=directionPlayer; }
     void toString() const override;
     [[nodiscard]] int getSpeed() const {return speed;}
-
+    void update();
     void selectDirectionCollision(int,int);
 protected:
     Direction direction;
