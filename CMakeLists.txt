@@ -8,17 +8,21 @@ set(SDL2_LIB_DIR "C:\\Users\\Kacper\\Dev\\tool\\SDL\\SDL2-2.30.1\\lib\\x64")
 
 include_directories(${SDL2_INCLUDE_DIR})
 add_executable(${PROJECT_NAME} main.cpp
-        Game.cpp
-        Game.h
-        Message.cpp
-        Message.h
-        GameEngine.cpp
-        GameEngine.h
-        Player.cpp
-        Player.h
-        GameObject.cpp
-        GameObject.h
-        Physics.cpp
-        Physics.h
+        game/Game.cpp
+        game/Game.h
+        tool/Message.cpp
+        tool/Message.h
+        engine/GameEngine.cpp
+        engine/GameEngine.h
+        game/player/Player.cpp
+        game/player/Player.h
+        game/gameObject/GameObject.cpp
+        game/gameObject/GameObject.h
+        game/physics/Physics.cpp
+        game/physics/Physics.h
+        game/gameObject/wall/Wall.cpp
+        game/gameObject/wall/Wall.h
+        game/gameObject/platform/Platform.cpp
+        game/gameObject/platform/Platform.h
 )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2.lib ${SDL2_LIB_DIR}/SDL2main.lib)
