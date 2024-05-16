@@ -1,12 +1,18 @@
 #include "GameEngine.h"
-#include "../game/player/Player.h"
-#include <unordered_map>
-GameEngine::~GameEngine() {
-    close();
+
+GameEngine::~GameEngine() {close(0);}
+SDL_Surface * GameEngine::setSurface(const Background& background) {
+    Surface = SDL_LoadBMP(background.src);
+    if (Surface == nullptr) {
+        std::cerr << "bmp error";
+        exit(0);
+    }
+    return  Surface;
 }
+
 void GameEngine::createWindow(GameConfig config)
 {
-    Window=SDL_CreateWindow(config.title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, config.screenSize.width,config.screenSize.height,SDL_WINDOW_SHOWN);
+    Window=SDL_CreateWindow(config.title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, int(config.screenSize.width),int(config.screenSize.height),SDL_WINDOW_SHOWN);
     if (Window == nullptr) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s SDL error: %s", message.getErrorMessage(ErrorType::CREATE).c_str(), SDL_GetError());
         message.showMessageBox(ErrorType::CREATE,ErrorMessageType::MERROR);
@@ -25,23 +31,12 @@ void GameEngine::createRender()
 {
     Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED);
     if (Renderer == nullptr) {
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s SDL error: %s", message.getErrorMessage(ErrorType::RENDER).c_str(), SDL_GetError());
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s SDL error: %s",message.getErrorMessage(ErrorType::RENDER).c_str(), SDL_GetError());
         message.showMessageBox(ErrorType::RENDER,ErrorMessageType::MERROR);
         exit(0);
     }
 }
-void GameEngine::setRenderBackground(Background background)
-{
-    SDL_SetRenderDrawColor(Renderer, background.rgba.red, background.rgba.green, background.rgba.blue, background.rgba.alfa);
-}
-SDL_Surface * GameEngine::setSurface(Background background) {
-    Surface = SDL_LoadBMP(background.src);
-    if (Surface == nullptr) {
-        std::cerr << "bmp error";
-        exit(0);
-    }
-    return  Surface;
-}
+
 void GameEngine::init() {
 
     createWindow(game.getGameConfig());
@@ -61,44 +56,9 @@ void GameEngine::init() {
         std::cerr<<"texture error";
         exit(0);
     }
-    /*
-    Font = TTF_OpenFont("../font/almendra/Almendra-regular.otf", 24);
-    if (!Font) {
-        std::cerr << "Nie można wczytać czcionki: " << TTF_GetError() << std::endl;
-        SDL_DestroyRenderer(Renderer);
-        SDL_DestroyWindow(Window);
-        SDL_Quit();
-        exit(0);
-    }
-
-    // Tworzenie powierzchni z tekstem
-    SDL_Surface* textSurface = TTF_RenderText_Solid(Font, "Punkty: 100", {255, 255, 255});
-    if (!textSurface) {
-        std::cerr << "Nie można utworzyć powierzchni tekstu: " << SDL_GetError() << std::endl;
-        TTF_CloseFont(Font);
-        SDL_DestroyRenderer(Renderer);
-        SDL_DestroyWindow(Window);
-        SDL_Quit();
-        exit(0);
-    }
-
-    // Tworzenie tekstury z powierzchni
-    TextTexture = SDL_CreateTextureFromSurface(Renderer, textSurface);
-    if (!TextTexture) {
-        std::cerr << "Nie można utworzyć tekstury tekstu: " << SDL_GetError() << std::endl;
-        SDL_FreeSurface(textSurface);
-        TTF_CloseFont(Font);
-        SDL_DestroyRenderer(Renderer);
-        SDL_DestroyWindow(Window);
-        SDL_Quit();
-        exit(0);
-    }
-    SDL_FreeSurface(textSurface);
-    TTF_CloseFont(Font);*/
     setRenderBackground(game.getGameConfig().background);
     run();
 }
-
 Direction GameEngine::checkDirection(SDL_Keycode key, Direction lastKey) {
     switch (key) {
         case SDLK_UP:
@@ -113,76 +73,65 @@ Direction GameEngine::checkDirection(SDL_Keycode key, Direction lastKey) {
             return lastKey;
     }
 }
+bool GameEngine::clickExit(Uint32 eventClick, Uint32  key)
+{
+    if(eventClick!=key) return true;
+    close(0);
+    return false;
+}
 void GameEngine::run()
 {
-    SDL_Event event;
-    Uint32 frameStart;
-    Uint32 frameTime;
-    std::unordered_map<SDL_Keycode, bool> keys;
     Direction lastDirection = game.getHero().getDirection();
     while (runGame) {
         frameStart = SDL_GetTicks();
-        int dx = 0, dy = 0;
+        float dx = 0; float dy = 0;
         while (SDL_PollEvent(&event) != 0) {
-            if (event.type == SDL_QUIT) {
-                runGame = false;
-            } else if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
+            clickExit(event.type,SDL_QUIT);
+            if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
                 if(event.key.keysym.sym == SDLK_TAB)
                 {
-                    game.getHero().move(500,500);
+                    game.getHero().move(200,300);
                 }
                 keys[event.key.keysym.sym] = (event.type == SDL_KEYDOWN);
                 lastDirection = checkDirection(event.key.keysym.sym, lastDirection);
             }
         }
         game.getHero().update();
-
         if (keys[SDLK_UP]) dy -= game.getHero().getSpeed();
-        //if (keys[SDLK_DOWN]) dy += game.getHero().getSpeed();
+        if (keys[SDLK_DOWN]) dy += game.getHero().getSpeed();
         if (keys[SDLK_LEFT]) dx -= game.getHero().getSpeed();
         if (keys[SDLK_RIGHT]) dx += game.getHero().getSpeed();
 
-
-        game.getHero().move(dx, dy, lastDirection);
-        if (auto* collisionObject = Game::checkCollisions(game.getHero())) {
-            if(collisionObject->isMovable())
-            {
-                collisionObject->move(game.getHero().getDirection(),dx,dy);
-            }
-            game.getHero().selectDirectionCollision(dx,dy);
-        }
-
+        game.heroMove(dx, dy, lastDirection);
         SDL_RenderClear(Renderer);
-        SDL_RenderCopy(Renderer, texture, nullptr, nullptr);
-
-        SDL_Rect playerRect = {game.getHero().getX(),game.getHero().getY(),game.getHero().getWidth(),game.getHero().getHeight()};
-        SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);
-        SDL_RenderFillRect(Renderer, &playerRect);
-
-        SDL_Rect textRect = {10, 10, 200, 50};
-
+        renderBackground();
+        game.getHero().render(Renderer);
         Game::renderGameObjects(Renderer);
-
-        //SDL_RenderCopy(Renderer, TextTexture, NULL, &textRect);
         SDL_RenderPresent(Renderer);
-
-        frameTime = SDL_GetTicks() - frameStart;
-        if (frameTime < 1000 / game.getGameConfig().FPS) {
-            SDL_Delay((1000 / game.getGameConfig().FPS) - frameTime);
-        }
+        setFPS();
     }
-    close();
+    close(0);
 }
-void GameEngine::close() {
+void GameEngine::setRenderBackground(Background background)
+{
+    SDL_SetRenderDrawColor(Renderer, background.rgba.red, background.rgba.green, background.rgba.blue, background.rgba.alfa);
+}
+void GameEngine::renderBackground()
+{
+    SDL_RenderCopy(Renderer, texture, nullptr, nullptr);
+}
+void GameEngine::setFPS()
+{
+    frameTime = SDL_GetTicks() - frameStart;
+    if (frameTime < 1000 / game.getGameConfig().FPS) {
+        SDL_Delay((1000 / game.getGameConfig().FPS) - frameTime);
+    }
+}
+void GameEngine::close(int code) {
     SDL_DestroyRenderer(Renderer);
     SDL_DestroyWindow(Window);
     Renderer = nullptr;
     Window = nullptr;
     SDL_Quit();
+    exit(0);
 }
-
-
-
-
-
-

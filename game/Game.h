@@ -6,9 +6,8 @@
 #include "player/Player.h"
 #include "gameObject/wall/Wall.h"
 #include "gameObject/platform/Platform.h"
-
 struct ScreenSize {
-    int width = 200;
+    int  width = 200;
     int height = 200;
 };
 struct Background{
@@ -24,18 +23,9 @@ struct GameConfig{
     bool set = false;
 
 };
-struct PlatformSize{
-    int height = 20;
-    int width = 20;
-};
-struct ObjectConfig{
-    PlatformSize minSize = {50,10};
-    RGBa color = {23,23,23};
-};
-struct Coordinates{ int x;int y;};
 
-static ObjectConfig wallConfig={{5}, {23, 23, 23}};
-static ObjectConfig platformConfig={{5,50},{230,23,23}};
+static ObjectConfig wallConfig={{0,0,0,5}, {23, 23, 23}};
+static ObjectConfig platformConfig={{0,0,5,50},{230,23,23}};
 
 class Game {
 
@@ -46,15 +36,16 @@ class Game {
 
         Player& getHero() { return hero; }
         GameConfig getGameConfig() { return gameConfig; }
-        static std::vector<Wall>& getWalls() { return walls; }
 
+        static std::vector<Wall>& getWalls() { return walls; }
         static void addWall(const Wall& wall) { walls.push_back(wall); }
+
         static std::vector<Platform>& getPlatforms() { return platforms; }
         static void addPlatform(const Platform& platform) { platforms.push_back(platform); }
 
         void setWall();
         void setPlatform();
-
+        void heroMove(int ,int,Direction);
         [[maybe_unused]] static void renderGameObjects(SDL_Renderer*);
         [[maybe_unused]] static GameObject * checkCollisions(const Player&);
 
@@ -62,11 +53,22 @@ class Game {
         GameConfig gameConfig;
         Player hero;
 
-        std::vector<Coordinates> coordinates={
-                {0,  100},
-                {60, 200},
-                {50,  100},
-                {90, 90}
+        std::vector<PlatformConfig> platformConfiguration={
+
+                {{0,450,200,20},PlatformType::GRASS},
+                {{180,470,20,50},PlatformType::GRASS},
+                {{200,500,200,20},PlatformType::GRASS},
+                {{400,480,70,20},PlatformType::GRASS},
+                {{470,460,70,20},PlatformType::GRASS},
+                {{540,440,70,20},PlatformType::GRASS},
+                {{610,420,200,20},PlatformType::GRASS},
+                {{510,300,200,20},PlatformType::GRASS},
+                {{680,130,70,20},PlatformType::FILLER},
+                {{310,330,140,20},PlatformType::GRASS},
+                {{90,280,140,20},PlatformType::GRASS},
+                {{70,130,210,20},PlatformType::GRASS},
+                {{300,130,70,20},PlatformType::METAL}
+
         };
         static std::vector<Wall> walls;
         static std::vector<Platform> platforms;

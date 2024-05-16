@@ -1,6 +1,5 @@
 #include "engine/GameEngine.h"
 #include "game/Game.h"
-
 int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
 
     ScreenSize screenSize = {800,600};
@@ -9,9 +8,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
             {
             screenSize,
             "GRA SDL2",
-            {{10,20,20},"background.bmp"},
+            {{10,20,20},"../asset/background.bmp"},
             60,
-            {{int(screenSize.width/2), int(screenSize.height/2), 70, 90 } ,10},
+            {{(40), (400), 30, 40 } ,{1,2,3},10},
             true
             };
 

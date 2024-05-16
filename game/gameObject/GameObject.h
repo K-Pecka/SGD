@@ -12,32 +12,37 @@ enum class Direction{
 struct Object{
     int x = 0;
     int y = 0;
-    int w = 50;
-    int h = 50;
+    int width = 50;
+    int height = 50;
 };
 struct RGBa{
     int red=0;
     int green=0;
     int blue=0;
     int alfa=1;
+    bool set=false;
 };
 struct Setting{
     bool movable= false;
     bool gravityable = false;
 };
 
+struct ObjectConfig{
+    Object size = {50, 10};
+    RGBa color = {23,23,23};
+};
 class GameObject : public Physics{
 
 public:
 
     GameObject(Object object,RGBa rgba,Setting setting,SettingPhysics settingPhysics):
-        x(object.x),y(object.y),width(object.w),height(object.h),rgba(rgba),setting(setting),Physics(settingPhysics) {}
+        x(object.x),y(object.y),width(object.width),height(object.height),rgba(rgba),setting(setting),Physics(settingPhysics) {}
 
     GameObject(Object object,RGBa rgba):
-        x(object.x),y(object.y),width(object.w),height(object.h),rgba(rgba),setting({}),Physics(basePhysics) {}
+        x(object.x),y(object.y),width(object.width),height(object.height),rgba(rgba),setting({}),Physics(basePhysics) {}
 
     explicit GameObject(Object object) :
-        x(object.x), y(object.y), width(object.w),height(object.h),Physics(basePhysics) {}
+        x(object.x), y(object.y), width(object.width),height(object.height),Physics(basePhysics) {}
 
     GameObject()=default;
 
@@ -45,7 +50,7 @@ public:
     void setX(int X) { x = X; }
     void setXplus(int X) { x+=X;}
 
-    int getY() const { return y; }
+    float getY() const { return y; }
     void setY(int Y) { y = Y; }
     void setYplus(int Y) { y+=Y;}
 
@@ -60,7 +65,7 @@ public:
 
 
     bool isMovable(){return setting.movable;}
-    void move(Direction,int,int);
+    void move(Direction,float,float);
     void render(SDL_Renderer*);
 
     virtual void toString() const;
