@@ -6,40 +6,44 @@
 #include <iostream>
 #include <utility>
 #include <vector>
-
-#include "../librarie/SDL_ttf.h"
-#include "../tool/Message.h"
 #include "../game/Game.h"
+#include <unordered_map>
+#include "../tool/Message.h"
 
 class GameEngine {
 public:
     explicit GameEngine(Game  gameSet) : game(std::move(gameSet)) {}
     ~GameEngine();
-    void init();
     void run();
-    void close();
-
+    void close(int);
+    void setFPS();
     static Direction checkDirection(SDL_Keycode,Direction );
-
+    void init();
 
 private:
+    SDL_Event event{};
+    Uint32 frameStart{};
+    Uint32 frameTime{};
+    std::unordered_map<SDL_Keycode, bool> keys;
+
     SDL_Window* Window = nullptr;
     SDL_Renderer* Renderer = nullptr;
     SDL_Surface* Surface = nullptr;
     SDL_Texture* texture = nullptr;
-    //TTF_Font* Font = nullptr;
-    //SDL_Texture* TextTexture = nullptr;
+
 
     Game game;
     Message message;
     bool runGame = true;
 
+    bool clickExit(Uint32,Uint32);
+    void setRenderBackground(Background);
+    SDL_Surface * setSurface(Background);
+    [[maybe_unused]] void renderBackground();
+
     void createWindow(GameConfig);
     void sdlInit();
     void createRender();
-    void setRenderBackground(Background);
-    SDL_Surface * setSurface(Background);
-
 };
 
 #endif // GAME_ENGINE_H

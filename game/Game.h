@@ -8,8 +8,8 @@
 #include "gameObject/platform/Platform.h"
 
 struct ScreenSize {
-    int width = 200;
-    int height = 200;
+    float width = 200;
+    float height = 200;
 };
 struct Background{
     RGBa rgba{};
@@ -25,14 +25,14 @@ struct GameConfig{
 
 };
 struct PlatformSize{
-    int height = 20;
-    int width = 20;
+    float height = 20;
+    float width = 20;
 };
 struct ObjectConfig{
     PlatformSize minSize = {50,10};
     RGBa color = {23,23,23};
 };
-struct Coordinates{ int x;int y;};
+struct Coordinates{ float x;float y;};
 
 static ObjectConfig wallConfig={{5}, {23, 23, 23}};
 static ObjectConfig platformConfig={{5,50},{230,23,23}};
@@ -46,15 +46,15 @@ class Game {
 
         Player& getHero() { return hero; }
         GameConfig getGameConfig() { return gameConfig; }
-        static std::vector<Wall>& getWalls() { return walls; }
 
+        static std::vector<Wall>& getWalls() { return walls; }
         static void addWall(const Wall& wall) { walls.push_back(wall); }
         static std::vector<Platform>& getPlatforms() { return platforms; }
         static void addPlatform(const Platform& platform) { platforms.push_back(platform); }
 
         void setWall();
         void setPlatform();
-
+        void heroMove(float ,float,Direction);
         [[maybe_unused]] static void renderGameObjects(SDL_Renderer*);
         [[maybe_unused]] static GameObject * checkCollisions(const Player&);
 
@@ -63,10 +63,8 @@ class Game {
         Player hero;
 
         std::vector<Coordinates> coordinates={
-                {0,  100},
-                {60, 200},
-                {50,  100},
-                {90, 90}
+                {0,  100},{60, 200},
+                {50,  100},{90, 90}
         };
         static std::vector<Wall> walls;
         static std::vector<Platform> platforms;

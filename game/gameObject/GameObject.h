@@ -10,10 +10,10 @@ enum class Direction{
     LEFT,RIGHT,UP,DOWN
 };
 struct Object{
-    int x = 0;
-    int y = 0;
-    int w = 50;
-    int h = 50;
+    float x = 0;
+    float y = 0;
+    float w = 50;
+    float h = 50;
 };
 struct RGBa{
     int red=0;
@@ -41,26 +41,26 @@ public:
 
     GameObject()=default;
 
-    int getX() const { return x; }
-    void setX(int X) { x = X; }
-    void setXplus(int X) { x+=X;}
+    float getX() const { return x; }
+    void setX(float X) { x = X; }
+    void setXplus(float X) { x+=X;}
 
-    int getY() const { return y; }
-    void setY(int Y) { y = Y; }
-    void setYplus(int Y) { y+=Y;}
+    float getY() const { return y; }
+    void setY(float Y) { y = Y; }
+    void setYplus(float Y) { y+=Y;}
 
     RGBa getRGBa() const { return rgba; }
     void setRGBa(RGBa Rgba) { rgba = Rgba; }
 
-    int getWidth() const { return width; }
-    void setWidth(int W) { width = W; }
+    float getWidth() const { return width; }
+    void setWidth(float W) { width = W; }
 
-    int getHeight() const { return height; }
-    void setHeight(int H) { height = H; }
+    float getHeight() const { return height; }
+    void setHeight(float H) { height = H; }
 
 
     bool isMovable(){return setting.movable;}
-    void move(Direction,int,int);
+    void move(Direction,float,float);
     void render(SDL_Renderer*);
 
     virtual void toString() const;
@@ -73,10 +73,10 @@ public:
     }
 protected:
     SettingPhysics basePhysics={9.8f,5};
-    int x;
-    int y;
-    int width;
-    int height;
+    float x;
+    float y;
+    float width;
+    float height;
     Setting setting;
     RGBa rgba{255,255,255,1};
 

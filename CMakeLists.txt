@@ -24,5 +24,6 @@ add_executable(${PROJECT_NAME} main.cpp
         game/gameObject/wall/Wall.h
         game/gameObject/platform/Platform.cpp
         game/gameObject/platform/Platform.h
+
 )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2.lib ${SDL2_LIB_DIR}/SDL2main.lib)

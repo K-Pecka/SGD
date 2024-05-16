@@ -11,22 +11,23 @@
 
 struct Hero{
     Object player;
+    RGBa color;
     int speedPlayer = 5;
 };
 
 class Player : public GameObject {
 public:
-    explicit Player(Hero hero) : GameObject((Object) hero.player), speed(hero.speedPlayer) {};
+    Player(Hero hero,RGBa rgba) : GameObject((Object) hero.player,rgba), speed(hero.speedPlayer) {};
 
-    void move(int dx, int dy,Direction direction);
-    void move(int dx, int dy);
+    void move(float dx, float dy,Direction direction);
+    void move(float dx, float dy);
     [[nodiscard]] Direction getDirection() const { return direction; }
 
     [[maybe_unused]] void setDirection(Direction directionPlayer) { this->direction=directionPlayer; }
     void toString() const override;
     [[nodiscard]] int getSpeed() const {return speed;}
     void update();
-    void selectDirectionCollision(int,int);
+    void selectDirectionCollision(float,float);
 protected:
     Direction direction;
     int speed;

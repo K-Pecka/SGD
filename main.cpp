@@ -11,7 +11,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
             "GRA SDL2",
             {{10,20,20},"background.bmp"},
             60,
-            {{int(screenSize.width/2), int(screenSize.height/2), 70, 90 } ,10},
+            {{(100), (100), 70, 90 } ,{1,2,3},10},
             true
             };
 

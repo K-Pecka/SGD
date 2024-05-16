@@ -1,10 +1,10 @@
 #include "Player.h"
-void Player::move(int dx, int dy,Direction directionPlayer) {
+void Player::move(float dx, float dy,Direction directionPlayer) {
     setX(getX() + dx);
     setY(getY() + dy);
     direction = directionPlayer;
 }
-void Player::move(int dx, int dy) {
+void Player::move(float dx, float dy) {
     setX(dx);
     setY(dy);
 }
@@ -14,7 +14,7 @@ void Player::toString() const {
     GameObject::toString();
     std::cout<<"{ speed: "<<getSpeed()<<" }"<<std::endl;
 }
-void Player::selectDirectionCollision(int dx,int dy){
+void Player::selectDirectionCollision(float dx,float dy){
 
     switch (getDirection()) {
         case Direction::LEFT:

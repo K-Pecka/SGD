@@ -7,10 +7,10 @@ void GameObject::toString() const{
 
 void GameObject::render(SDL_Renderer * render) {
     SDL_SetRenderDrawColor(render, rgba.red, rgba.green, rgba.blue, rgba.alfa);
-    SDL_Rect rect = {x, y, width, height};
+    SDL_Rect rect = {int(x), int(y), int(width), int(height)};
     SDL_RenderFillRect(render, &rect);
 }
-void GameObject::move(Direction direction,int dx,int dy){
+void GameObject::move(Direction direction,float dx,float dy){
     switch (direction) {
         case Direction::LEFT:
         case Direction::RIGHT:

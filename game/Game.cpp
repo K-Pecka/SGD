@@ -3,7 +3,7 @@
 std::vector<Wall> Game::walls;
 std::vector<Platform> Game::platforms;
 
-Game::Game(const GameConfig& gameConfig) : gameConfig(gameConfig), hero(Player(gameConfig.player)) {
+Game::Game(const GameConfig& gameConfig) : gameConfig(gameConfig), hero(Player(gameConfig.player,gameConfig.player.color)) {
     setWall();
     setPlatform();
 }
@@ -27,16 +27,17 @@ void Game::setPlatform(){
 GameObject * Game::checkCollisions(const Player& player) {
     const GameObject& playerObject = player;
 
-    for (const auto& gameObject : walls) {
-        if (playerObject.checkCollision(gameObject)) {
-            return (GameObject *) &gameObject;
-        }
-    }
     for (const auto& gameObject : platforms) {
         if (playerObject.checkCollision(gameObject)) {
             return (GameObject *) &gameObject;
         }
     }
+    for (const auto& gameObject : walls) {
+        if (playerObject.checkCollision(gameObject)) {
+            return (GameObject *) &gameObject;
+        }
+    }
+
     return nullptr;
 }
 void Game::renderGameObjects(SDL_Renderer* Renderer) {
@@ -45,5 +46,13 @@ void Game::renderGameObjects(SDL_Renderer* Renderer) {
     }
     for (auto obj : getPlatforms()) {
         obj.render(Renderer);
+    }
+}
+void Game::heroMove(float dx, float dy, Direction lastDirection) {
+    getHero().move(dx, dy, lastDirection);
+
+    if (auto* collisionObject = Game::checkCollisions(getHero())) {
+        if(collisionObject->isMovable()) collisionObject->move(getHero().getDirection(),dx,dy);
+        getHero().selectDirectionCollision(dx,dy);
     }
 }
