@@ -28,7 +28,6 @@ struct GameConfig{
     bool set = false;
 
 };
-
 static ObjectConfig wallConfig={{0,0,0,5}, {23, 23, 23}};
 static ObjectConfig platformConfig={{0,0,5,50},{230,23,23}};
 
@@ -65,7 +64,7 @@ class Game {
         Player hero;
 
         std::vector<PlatformConfig> platformConfiguration={
-                {{0,450,200,40},PlatformType::FILLER},
+                {{0,450,200,40},PlatformType::GRASS},
                 {{210,480,200,20},PlatformType::FILLER},
                 {{400,520,60,20},PlatformType::FILLER},
                 {{470,530,60,20},PlatformType::FILLER},

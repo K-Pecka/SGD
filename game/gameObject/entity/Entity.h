@@ -25,8 +25,6 @@ public:
     [[nodiscard]] SpeedEntity getSpeed() const {return speed;}
     [[nodiscard]] int getSpeedX() const {return speed.vx;}
     [[nodiscard]] void setSpeedY(int speedY) {speed.vy = speedY;}
-
-
     void setSpeed(SpeedEntity speedChange) { speed = speedChange;}
     void selectDirectionCollision(int,int);
     void fall() {

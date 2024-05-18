@@ -1,32 +1,42 @@
-#include "../GameObject.h"
 #ifndef SDL_GAME_PLATFORM_H
 #define SDL_GAME_PLATFORM_H
 
-enum class PlatformType{
-    FILLER,GRASS,METAL,NULL_PTR
+#include "../../../texture/Texture.h"
+#include "../GameObject.h"
+enum class PlatformType {
+    FILLER, GRASS, METAL, NULL_PTR
 };
 struct ObjectConfig{
     Object size = {50,10};
     RGBa color = {23,23,23};
 };
+
 struct PlatformConfig{
     ObjectConfig object;
     PlatformType platformType = PlatformType::NULL_PTR;
 };
-class Platform: public GameObject {
+class Platform : public GameObject {
 public:
-    Platform(const Object& object, const RGBa& rgba,Setting setting,PlatformType platformType): platformType(platformType),GameObject(object,rgba,setting) {}
-    Platform(const Object& object, const RGBa& rgba,PlatformType platformType): platformType(platformType), GameObject(object,rgba) {}
-    static RGBa getPlatformColor(PlatformType);
-    static char * getPlatformTexture(PlatformType);
+    Platform(const Object& object, const RGBa& rgba, Setting setting, PlatformType platformType)
+            : GameObject(object, rgba, setting), platformType(platformType) {}
 
-    void setTexture(SDL_Renderer*);
-    void repeatTexture(SDL_Renderer*);
+    Platform(const Object& object, const RGBa& rgba, PlatformType platformType)
+            : GameObject(object, rgba), platformType(platformType) {
+        addLayerTexture({{Texture({0,-5,TextureType::GRASS})}});
+        addLayerTexture({{Texture({0,0,TextureType::FILLER})}});
+
+
+    }
+
+    static RGBa getPlatformColor(PlatformType platformType);
+
+    void setTexture(SDL_Renderer* renderer);
+    void addLayerTexture(Texture texture);
+    void renderTexture(SDL_Renderer* renderer) const;
+
 private:
-
-    SDL_Texture* texture = nullptr;
+    SDL_Texture * texture= nullptr;
     PlatformType platformType;
 };
-
 
 #endif //SDL_GAME_PLATFORM_H

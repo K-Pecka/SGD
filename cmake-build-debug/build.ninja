@@ -51,7 +51,7 @@ build cmake_object_order_depends_target_SDL_game: phony || CMakeFiles\SDL_game.d
 
 build CMakeFiles\SDL_game.dir\main.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\main.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -59,7 +59,7 @@ build CMakeFiles\SDL_game.dir\main.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Deb
 
 build CMakeFiles\SDL_game.dir\game\Game.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\game\Game.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\game
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -67,7 +67,7 @@ build CMakeFiles\SDL_game.dir\game\Game.cpp.obj: CXX_COMPILER__SDL_game_unscanne
 
 build CMakeFiles\SDL_game.dir\tool\Message.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\tool\Message.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\tool
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -75,7 +75,7 @@ build CMakeFiles\SDL_game.dir\tool\Message.cpp.obj: CXX_COMPILER__SDL_game_unsca
 
 build CMakeFiles\SDL_game.dir\engine\GameEngine.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\engine\GameEngine.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\engine
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -83,7 +83,7 @@ build CMakeFiles\SDL_game.dir\engine\GameEngine.cpp.obj: CXX_COMPILER__SDL_game_
 
 build CMakeFiles\SDL_game.dir\game\gameObject\entity\player\Player.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\game\gameObject\entity\player\Player.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\game\gameObject\entity\player
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -91,7 +91,7 @@ build CMakeFiles\SDL_game.dir\game\gameObject\entity\player\Player.cpp.obj: CXX_
 
 build CMakeFiles\SDL_game.dir\game\gameObject\GameObject.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\game\gameObject\GameObject.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\game\gameObject
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -99,7 +99,7 @@ build CMakeFiles\SDL_game.dir\game\gameObject\GameObject.cpp.obj: CXX_COMPILER__
 
 build CMakeFiles\SDL_game.dir\game\physics\Physics.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\game\physics\Physics.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\game\physics
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -107,7 +107,7 @@ build CMakeFiles\SDL_game.dir\game\physics\Physics.cpp.obj: CXX_COMPILER__SDL_ga
 
 build CMakeFiles\SDL_game.dir\game\gameObject\wall\Wall.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\game\gameObject\wall\Wall.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\game\gameObject\wall
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -115,7 +115,7 @@ build CMakeFiles\SDL_game.dir\game\gameObject\wall\Wall.cpp.obj: CXX_COMPILER__S
 
 build CMakeFiles\SDL_game.dir\game\gameObject\platform\Platform.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\game\gameObject\platform\Platform.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\game\gameObject\platform
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -123,7 +123,7 @@ build CMakeFiles\SDL_game.dir\game\gameObject\platform\Platform.cpp.obj: CXX_COM
 
 build CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy\Enemy.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\game\gameObject\entity\enemy\Enemy.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -131,7 +131,7 @@ build CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy\Enemy.cpp.obj: CXX_CO
 
 build CMakeFiles\SDL_game.dir\game\gameObject\entity\Entity.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\game\gameObject\entity\Entity.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\game\gameObject\entity
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
@@ -139,9 +139,17 @@ build CMakeFiles\SDL_game.dir\game\gameObject\entity\Entity.cpp.obj: CXX_COMPILE
 
 build CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy\monster\Monster.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\game\gameObject\entity\enemy\monster\Monster.cpp || cmake_object_order_depends_target_SDL_game
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
-  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy\monster
+  TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
+  TARGET_PDB = SDL_game.pdb
+
+build CMakeFiles\SDL_game.dir\texture\Texture.cpp.obj: CXX_COMPILER__SDL_game_unscanned_Debug C$:\Users\Kacper\Dev\SDL_game\texture\Texture.cpp || cmake_object_order_depends_target_SDL_game
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
+  INCLUDES = -IC:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\include -I"C:\Users\Kacper\Dev	ool\SDL\SDL2_image\include"
+  OBJECT_DIR = CMakeFiles\SDL_game.dir
+  OBJECT_FILE_DIR = CMakeFiles\SDL_game.dir\texture
   TARGET_COMPILE_PDB = CMakeFiles\SDL_game.dir\
   TARGET_PDB = SDL_game.pdb
 
@@ -153,10 +161,10 @@ build CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy\monster\Monster.cpp.o
 #############################################
 # Link the executable SDL_game.exe
 
-build SDL_game.exe: CXX_EXECUTABLE_LINKER__SDL_game_Debug CMakeFiles\SDL_game.dir\main.cpp.obj CMakeFiles\SDL_game.dir\game\Game.cpp.obj CMakeFiles\SDL_game.dir\tool\Message.cpp.obj CMakeFiles\SDL_game.dir\engine\GameEngine.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\entity\player\Player.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\GameObject.cpp.obj CMakeFiles\SDL_game.dir\game\physics\Physics.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\wall\Wall.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\platform\Platform.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy\Enemy.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\entity\Entity.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy\monster\Monster.cpp.obj | C$:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\lib\x64\SDL2.lib C$:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\lib\x64\SDL2main.lib
+build SDL_game.exe: CXX_EXECUTABLE_LINKER__SDL_game_Debug CMakeFiles\SDL_game.dir\main.cpp.obj CMakeFiles\SDL_game.dir\game\Game.cpp.obj CMakeFiles\SDL_game.dir\tool\Message.cpp.obj CMakeFiles\SDL_game.dir\engine\GameEngine.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\entity\player\Player.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\GameObject.cpp.obj CMakeFiles\SDL_game.dir\game\physics\Physics.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\wall\Wall.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\platform\Platform.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy\Enemy.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\entity\Entity.cpp.obj CMakeFiles\SDL_game.dir\game\gameObject\entity\enemy\monster\Monster.cpp.obj CMakeFiles\SDL_game.dir\texture\Texture.cpp.obj | C$:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\lib\x64\SDL2.lib C$:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\lib\x64\SDL2main.lib C$:\Users\Kacper\Dev\tool\SDL\SDL2_image\lib\x64\SDL2_image.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = C:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\lib\x64\SDL2.lib  C:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\lib\x64\SDL2main.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = C:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\lib\x64\SDL2.lib  C:\Users\Kacper\Dev\tool\SDL\SDL2-2.30.1\lib\x64\SDL2main.lib  C:\Users\Kacper\Dev\tool\SDL\SDL2_image\lib\x64\SDL2_image.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\SDL_game.dir
   POST_BUILD = cd .
   PRE_LINK = cd .

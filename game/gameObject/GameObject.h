@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <SDL.h>
+#include "../../texture/Texture.h"
 
 #ifndef SDL_GAME_GAME_OBJECT_H
 #define SDL_GAME_GAME_OBJECT_H
@@ -61,9 +62,11 @@ public:
 
     bool isMovable(){return setting.movable;}
     void move(Direction,int,int);
-    void render(SDL_Renderer*);
+    void render(SDL_Renderer*) const;
 
+    std::vector<Texture> getTexture(){return textures;}
     virtual void toString() const;
+
 
     [[nodiscard]] bool checkCollision(const GameObject& rect) const {
         return (getX() < rect.getX() + rect.getWidth() &&
@@ -78,7 +81,7 @@ protected:
     int height;
     Setting setting;
     RGBa rgba{255,255,255,1};
-
+    std::vector<Texture> textures;
 };
 
 

@@ -46,9 +46,14 @@ void Game::renderGameObjects(SDL_Renderer* Renderer) {
 
     for (auto obj : getPlatforms()) {
         obj.render(Renderer);
-    }for (auto obj : getPlatforms()) {
+    }
+    for (auto obj : getPlatforms()) {
         obj.setTexture(Renderer);
     }
+    for (auto obj : getPlatforms()) {
+        obj.renderTexture(Renderer);
+    }
+
     for (auto obj : getWalls()) {
         obj.render(Renderer);
     }
@@ -63,12 +68,10 @@ void Game::heroMove(int dx, int dy, Direction lastDirection) {
     GameObject* collisionObject = Game::checkCollisions(playerCollision);
 
     if (collisionObject) {
-        collisionObject->toString();
         if (collisionObject->isMovable()) {
             collisionObject->move(getHero().getDirection(), dx, dd);
         }
 
-        // Dostosowanie pozycji bohatera na podstawie kolizji
         if (dx != 0) {
             if (collisionObject->getX() > getHero().getX()) {
                 getHero().setDirection(Direction::LEFT);
@@ -79,10 +82,8 @@ void Game::heroMove(int dx, int dy, Direction lastDirection) {
 
         if (dd != 0) {
             if (collisionObject->getY() > getHero().getY()) {
-                // Kolizja od góry
                 getHero().setY(collisionObject->getY() - getHero().getHeight());
             } else {
-                // Kolizja od dołu
                 getHero().setY(collisionObject->getY() + collisionObject->getHeight());
             }
         }

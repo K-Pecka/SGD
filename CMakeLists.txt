@@ -6,7 +6,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(SDL2_INCLUDE_DIR "C:\\Users\\Kacper\\Dev\\tool\\SDL\\SDL2-2.30.1\\include")
 set(SDL2_LIB_DIR "C:\\Users\\Kacper\\Dev\\tool\\SDL\\SDL2-2.30.1\\lib\\x64")
 
+set(SDL2_Image_INCLUDE_DIR "C:\\Users\\Kacper\\Dev\tool\\SDL\\SDL2_image\\include")
+set(SDL2_Image_LIB_DIR "C:\\Users\\Kacper\\Dev\\tool\\SDL\\SDL2_image\\lib\\x64")
+
 include_directories(${SDL2_INCLUDE_DIR})
+include_directories(${SDL2_Image_INCLUDE_DIR})
+
 add_executable(${PROJECT_NAME} main.cpp
         game/Game.cpp
         game/Game.h
@@ -30,6 +35,8 @@ add_executable(${PROJECT_NAME} main.cpp
         game/gameObject/entity/Entity.h
         game/gameObject/entity/enemy/monster/Monster.cpp
         game/gameObject/entity/enemy/monster/Monster.h
+        texture/Texture.cpp
+        texture/Texture.h
 
 )
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2.lib ${SDL2_LIB_DIR}/SDL2main.lib)
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2.lib ${SDL2_LIB_DIR}/SDL2main.lib ${SDL2_Image_LIB_DIR}/SDL2_image.lib)

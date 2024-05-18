@@ -104,8 +104,6 @@ void GameEngine::run()
 
         if(frame % 5 == 0) game.updateEntity();
 
-        if (keys[SDLK_UP]) dy -= game.getHero().getSpeed().vy;
-        if (keys[SDLK_DOWN]) dy += game.getHero().getSpeed().vy;
         if (keys[SDLK_LEFT]) dx -= game.getHero().getSpeed().vx;
         if (keys[SDLK_RIGHT]) dx += game.getHero().getSpeed().vx;
 
@@ -113,9 +111,9 @@ void GameEngine::run()
         SDL_RenderClear(Renderer);
         renderBackground();
         game.heroMove(dx, dy, lastDirection);
-        Game::renderGameObjects(Renderer);
         game.entityRender(Renderer);
         game.getHero().render(Renderer);
+        Game::renderGameObjects(Renderer);
         SDL_RenderPresent(Renderer);
         setFPS();
         frame++;
