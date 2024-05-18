@@ -81,35 +81,44 @@ bool GameEngine::clickExit(Uint32 eventClick, Uint32  key)
 }
 void GameEngine::run()
 {
+    int frame=0;
     Direction lastDirection = game.getHero().getDirection();
     while (runGame) {
         frameStart = SDL_GetTicks();
         int dx = 0; int dy = 0;
         while (SDL_PollEvent(&event) != 0) {
             clickExit(event.type,SDL_QUIT);
-            if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
-                if(event.key.keysym.sym == SDLK_TAB)
+            if (event.type == SDL_KEYDOWN)
+            {
+                if(event.key.keysym.sym == SDLK_SPACE)
                 {
-                    game.getHero().move(200,300);
+                    game.getHero().setSpeed({game.getHero().getSpeedX(),-20,true});
                 }
+            }
+
+            if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
                 keys[event.key.keysym.sym] = (event.type == SDL_KEYDOWN);
                 lastDirection = checkDirection(event.key.keysym.sym, lastDirection);
             }
         }
+
+        if(frame % 5 == 0) game.updateEntity();
 
         if (keys[SDLK_UP]) dy -= game.getHero().getSpeed().vy;
         if (keys[SDLK_DOWN]) dy += game.getHero().getSpeed().vy;
         if (keys[SDLK_LEFT]) dx -= game.getHero().getSpeed().vx;
         if (keys[SDLK_RIGHT]) dx += game.getHero().getSpeed().vx;
 
-        game.heroMove(dx, dy, lastDirection);
         game.getHero().update();
         SDL_RenderClear(Renderer);
         renderBackground();
-        game.getHero().render(Renderer);
+        game.heroMove(dx, dy, lastDirection,Renderer);
         Game::renderGameObjects(Renderer);
+        game.entityRender(Renderer);
+        game.getHero().render(Renderer);
         SDL_RenderPresent(Renderer);
         setFPS();
+        frame++;
     }
     close(0);
 }

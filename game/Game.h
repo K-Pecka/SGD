@@ -3,10 +3,13 @@
 
 #include <vector>
 #include <memory>
+#include <random>
+
 #include "../game/physics/Physics.h"
 #include "gameObject/wall/Wall.h"
 #include "gameObject/platform/Platform.h"
 #include "gameObject/Entity/player/Player.h"
+#include "../game/gameObject/entity/enemy/monster/Monster.h"
 
 struct ScreenSize {
     int width = 200;
@@ -47,7 +50,13 @@ class Game {
 
         void setWall();
         void setPlatform();
-        void heroMove(int ,int,Direction);
+        static void updateEntity();
+        static void setEntity();
+        static void entityRender(SDL_Renderer*);
+
+        static void updateMonster();
+        static void setMonster();
+        void heroMove(int ,int,Direction,SDL_Renderer*);
         [[maybe_unused]] static void renderGameObjects(SDL_Renderer*);
         [[maybe_unused]] static GameObject * checkCollisions(const Player&);
 
@@ -56,12 +65,22 @@ class Game {
         Player hero;
 
         std::vector<PlatformConfig> platformConfiguration={
-                {{{0,100,40,40}},PlatformType::GRASS},
-                {{{100,100,40,40}},PlatformType::FILLER},
-                {{{10,500,500,40}},PlatformType::FILLER}
+                {{0,450,200,40},PlatformType::FILLER},
+                {{210,480,200,20},PlatformType::FILLER},
+                {{400,520,60,20},PlatformType::FILLER},
+                {{470,530,60,20},PlatformType::FILLER},
+                {{540,440,60,20},PlatformType::FILLER},
+                {{610,420,200,20},PlatformType::FILLER},
+                {{510,300,200,20},PlatformType::FILLER},
+                {{680,130,80,20},PlatformType::FILLER},
+                {{310,330,140,20},PlatformType::FILLER},
+                {{90,280,140,20},PlatformType::FILLER},
+                {{70,130,200,20},PlatformType::FILLER},
+                {{300,130,80,20},PlatformType::METAL}
         };
         static std::vector<Wall> walls;
         static std::vector<Platform> platforms;
+        static std::vector<Monster> monsters;
 
 };
 

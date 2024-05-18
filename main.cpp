@@ -10,7 +10,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
             "GRA SDL2",
             {{10,20,20},"../asset/background.bmp"},
             60,
-            {{(40), (300), 30, 40 } ,{1,2,3},{5,1}},
+            {{(40), (300), 30, 40 } ,{1,2,3},{5,1,true}},
             true
             };
 
