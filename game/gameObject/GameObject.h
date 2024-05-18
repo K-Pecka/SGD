@@ -1,13 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <SDL.h>
-#include "../physics/Physics.h"
 
 #ifndef SDL_GAME_GAME_OBJECT_H
 #define SDL_GAME_GAME_OBJECT_H
 
 enum class Direction{
-    LEFT,RIGHT,UP,DOWN
+    LEFT,RIGHT,UP,DOWN,NULL_PTR
 };
 struct Object{
     int x = 0;
@@ -27,22 +26,18 @@ struct Setting{
     bool gravityable = false;
 };
 
-struct ObjectConfig{
-    Object size = {50, 10};
-    RGBa color = {23,23,23};
-};
-class GameObject : public Physics{
+class GameObject{
 
 public:
 
-    GameObject(Object object,RGBa rgba,Setting setting,SettingPhysics settingPhysics):
-        x(object.x),y(object.y),width(object.width),height(object.height),rgba(rgba),setting(setting),Physics(settingPhysics) {}
+    GameObject(Object object,RGBa rgba,Setting setting):
+        x(object.x),y(object.y),width(object.width),height(object.height),rgba(rgba),setting(setting) {}
 
     GameObject(Object object,RGBa rgba):
-        x(object.x),y(object.y),width(object.width),height(object.height),rgba(rgba),setting({}),Physics(basePhysics) {}
+        x(object.x),y(object.y),width(object.width),height(object.height),rgba(rgba),setting({}){}
 
     explicit GameObject(Object object) :
-        x(object.x), y(object.y), width(object.width),height(object.height),Physics(basePhysics) {}
+        x(object.x), y(object.y), width(object.width),height(object.height) {}
 
     GameObject()=default;
 
@@ -50,7 +45,7 @@ public:
     void setX(int X) { x = X; }
     void setXplus(int X) { x+=X;}
 
-    float getY() const { return y; }
+    int getY() const { return y; }
     void setY(int Y) { y = Y; }
     void setYplus(int Y) { y+=Y;}
 
@@ -65,7 +60,7 @@ public:
 
 
     bool isMovable(){return setting.movable;}
-    void move(Direction,float,float);
+    void move(Direction,int,int);
     void render(SDL_Renderer*);
 
     virtual void toString() const;
@@ -77,7 +72,6 @@ public:
                 getY() + getHeight() > rect.getY());
     }
 protected:
-    SettingPhysics basePhysics={9.8f,5};
     int x;
     int y;
     int width;
@@ -85,7 +79,6 @@ protected:
     Setting setting;
     RGBa rgba{255,255,255,1};
 
-    void update(GameObject &obj);
 };
 
 

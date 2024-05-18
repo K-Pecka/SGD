@@ -10,7 +10,7 @@ void GameObject::render(SDL_Renderer * render) {
     SDL_Rect rect = {int(x), int(y), int(width), int(height)};
     SDL_RenderFillRect(render, &rect);
 }
-void GameObject::move(Direction direction,float dx,float dy){
+void GameObject::move(Direction direction,int dx,int dy){
     switch (direction) {
         case Direction::LEFT:
         case Direction::RIGHT:

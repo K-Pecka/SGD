@@ -12,7 +12,7 @@
 
 class GameEngine {
 public:
-    explicit GameEngine(Game  gameSet) : game(std::move(gameSet)) {}
+    explicit GameEngine(const Game&  gameSet) : game(std::move(gameSet)) {}
     ~GameEngine();
     void run();
     void close(int);

@@ -84,7 +84,7 @@ void GameEngine::run()
     Direction lastDirection = game.getHero().getDirection();
     while (runGame) {
         frameStart = SDL_GetTicks();
-        float dx = 0; float dy = 0;
+        int dx = 0; int dy = 0;
         while (SDL_PollEvent(&event) != 0) {
             clickExit(event.type,SDL_QUIT);
             if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
@@ -96,13 +96,14 @@ void GameEngine::run()
                 lastDirection = checkDirection(event.key.keysym.sym, lastDirection);
             }
         }
-        game.getHero().update();
-        if (keys[SDLK_UP]) dy -= game.getHero().getSpeed();
-        if (keys[SDLK_DOWN]) dy += game.getHero().getSpeed();
-        if (keys[SDLK_LEFT]) dx -= game.getHero().getSpeed();
-        if (keys[SDLK_RIGHT]) dx += game.getHero().getSpeed();
+
+        if (keys[SDLK_UP]) dy -= game.getHero().getSpeed().vy;
+        if (keys[SDLK_DOWN]) dy += game.getHero().getSpeed().vy;
+        if (keys[SDLK_LEFT]) dx -= game.getHero().getSpeed().vx;
+        if (keys[SDLK_RIGHT]) dx += game.getHero().getSpeed().vx;
 
         game.heroMove(dx, dy, lastDirection);
+        game.getHero().update();
         SDL_RenderClear(Renderer);
         renderBackground();
         game.getHero().render(Renderer);
