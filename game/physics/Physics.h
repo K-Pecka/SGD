@@ -10,7 +10,7 @@ public:
     Physics() =default;
     static int getGravitation()  {return gravity;}
 private:
-    static const int gravity=9;
+    static const int gravity=2;
 };
 
 

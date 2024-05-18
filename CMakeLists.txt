@@ -14,8 +14,8 @@ add_executable(${PROJECT_NAME} main.cpp
         tool/Message.h
         engine/GameEngine.cpp
         engine/GameEngine.h
-        game/gameObject/Entity/player/Player.cpp
-        game/gameObject/Entity/player/Player.h
+        game/gameObject/entity/player/Player.cpp
+        game/gameObject/entity/player/Player.h
         game/gameObject/GameObject.cpp
         game/gameObject/GameObject.h
         game/physics/Physics.cpp
@@ -24,10 +24,12 @@ add_executable(${PROJECT_NAME} main.cpp
         game/gameObject/wall/Wall.h
         game/gameObject/platform/Platform.cpp
         game/gameObject/platform/Platform.h
-        game/gameObject/Entity/enemy/Enemy.cpp
-        game/gameObject/Entity/enemy/Enemy.h
-        game/gameObject/Entity/Entity.cpp
-        game/gameObject/Entity/Entity.h
+        game/gameObject/entity/enemy/Enemy.cpp
+        game/gameObject/entity/enemy/Enemy.h
+        game/gameObject/entity/Entity.cpp
+        game/gameObject/entity/Entity.h
+        game/gameObject/entity/enemy/monster/Monster.cpp
+        game/gameObject/entity/enemy/monster/Monster.h
 
 )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2.lib ${SDL2_LIB_DIR}/SDL2main.lib)
