@@ -20,7 +20,7 @@ void Platform::addLayerTexture(Texture texture) {
     textures.push_back(texture);
 }
 SDL_Texture* loadTexture(const char* file, SDL_Renderer* renderer) {
-    SDL_Surface* tempSurface = SDL_LoadBMP(file);
+    SDL_Surface* tempSurface = IMG_Load(file);
     if (tempSurface == nullptr) {
         std::cerr << "Failed to load BMP: " << SDL_GetError() << std::endl;
         return nullptr;
@@ -42,11 +42,9 @@ void Platform::setTexture(SDL_Renderer* renderer) {
     }
     for (const auto& layer : textures) {
         if (layer.layerTextures.sdl_texture != nullptr) {
-            std::cerr << textures.size() << std::endl;
             int texW = 0;
             int texH = 0;
             SDL_QueryTexture(layer.layerTextures.sdl_texture, NULL, NULL, &texW, &texH);
-            std::cout<<texW<<std::endl;
             for (int yy = y; yy < y + height; yy += texH) {
                 for (int xx = x; xx < x + width; xx += texW) {
                     SDL_Rect dstRect = {xx+layer.getOffsetX(), yy+layer.getOffsetY(), texW, texH};

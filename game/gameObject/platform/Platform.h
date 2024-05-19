@@ -1,6 +1,7 @@
 #ifndef SDL_GAME_PLATFORM_H
 #define SDL_GAME_PLATFORM_H
 
+#include <SDL_image.h>
 #include "../../../texture/Texture.h"
 #include "../GameObject.h"
 enum class PlatformType {
