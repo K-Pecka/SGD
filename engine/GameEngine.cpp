@@ -29,7 +29,7 @@ void GameEngine::sdlInit()
 }
 void GameEngine::createRender()
 {
-    Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED);
+    Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (Renderer == nullptr) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s SDL error: %s",message.getErrorMessage(ErrorType::RENDER).c_str(), SDL_GetError());
         message.showMessageBox(ErrorType::RENDER,ErrorMessageType::MERROR);
@@ -79,13 +79,14 @@ bool GameEngine::clickExit(Uint32 eventClick, Uint32  key)
     close(0);
     return false;
 }
+
 void GameEngine::run()
 {
     int frame=0;
     Direction lastDirection = game.getHero().getDirection();
     while (runGame) {
         frameStart = SDL_GetTicks();
-        int dx = 0; int dy = 0;
+        int dx = 0;
         while (SDL_PollEvent(&event) != 0) {
             clickExit(event.type,SDL_QUIT);
             if (event.type == SDL_KEYDOWN)
@@ -101,22 +102,23 @@ void GameEngine::run()
                 lastDirection = checkDirection(event.key.keysym.sym, lastDirection);
             }
         }
+        frame++;
 
         if(frame % 5 == 0) game.updateEntity();
 
         if (keys[SDLK_LEFT]) dx -= game.getHero().getSpeed().vx;
         if (keys[SDLK_RIGHT]) dx += game.getHero().getSpeed().vx;
 
-        game.getHero().update();
         SDL_RenderClear(Renderer);
         renderBackground();
-        game.heroMove(dx, dy, lastDirection);
+
+        game.getHero().update(Renderer);
+        game.heroMove(dx, 0, lastDirection);
         game.entityRender(Renderer);
-        game.getHero().render(Renderer);
+
         Game::renderGameObjects(Renderer);
         SDL_RenderPresent(Renderer);
         setFPS();
-        frame++;
     }
     close(0);
 }

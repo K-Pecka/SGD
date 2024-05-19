@@ -9,20 +9,10 @@ void Entity::move(int dx, int dy) {
     setY(dy);
 }
 void Entity::selectDirectionCollision(int dx,int dy){
-
-    switch (getDirection()) {
-        case Direction::LEFT:
-            move(dx , dy, Direction::RIGHT);
-            break;
-        case Direction::RIGHT:
-            move(dx, dy, Direction::LEFT);
-            break;
-        case Direction::UP:
-            move(dx, dy, Direction::DOWN);
-            break;
-        case Direction::DOWN:
-            move(dx, dy, Direction::UP);
-            break;
-
-    }
+    if(dx==0)
+        move(dx , dy, Direction::DOWN);
+    if(getX()<dx+getX())
+        move(dx , dy, Direction::RIGHT);
+    else
+        move(dx , dy, Direction::LEFT);
 }

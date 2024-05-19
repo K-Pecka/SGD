@@ -6,7 +6,7 @@
 #include <vector>
 #include <SDL.h>
 enum class TextureType{
-    FILLER,GRASS,METAL,NULL_PTR
+    FILLER,GRASS,METAL,GRASS_SURFACE,HERO,NULL_PTR
 };
 struct TextureConfig{
     int offsetX = 0 ;
@@ -19,15 +19,15 @@ class Texture {
 public:
     explicit Texture(TextureConfig layerTextures):layerTextures(layerTextures){}
 
-    char * getTexture();
+    char * getTexture() const;
+    static char * getTextureTypeSrc(TextureType);
+    static char * getTexture(TextureType);
     int getOffsetX()const{return layerTextures.offsetX;};
     int getOffsetY()const{return layerTextures.offsetY;};
     void setSDLTexture(SDL_Texture* texture) { layerTextures.sdl_texture = texture; }
     TextureConfig layerTextures;
+    TextureType getTextureTypeT() const{return layerTextures.textureType;}
 private:
-
-
-    TextureType getTextureType() const{return layerTextures.textureType;}
 };
 
 

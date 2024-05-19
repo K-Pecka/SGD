@@ -50,10 +50,6 @@ void Game::renderGameObjects(SDL_Renderer* Renderer) {
     for (auto obj : getPlatforms()) {
         obj.setTexture(Renderer);
     }
-    for (auto obj : getPlatforms()) {
-        obj.renderTexture(Renderer);
-    }
-
     for (auto obj : getWalls()) {
         obj.render(Renderer);
     }

@@ -35,7 +35,7 @@ public:
     }
 
 protected:
-    Direction direction=Direction::NULL_PTR;
+    Direction direction=Direction::LEFT;
     SpeedEntity speed;
 };
 

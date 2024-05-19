@@ -23,8 +23,9 @@ public:
 
     Platform(const Object& object, const RGBa& rgba, PlatformType platformType)
             : GameObject(object, rgba), platformType(platformType) {
-        addLayerTexture({{Texture({0,-5,TextureType::GRASS})}});
-        addLayerTexture({{Texture({0,0,TextureType::FILLER})}});
+        addLayerTexture({{Texture({0,-15,TextureType::GRASS})}});
+        addLayerTexture({{Texture({0,0,TextureType::GRASS_SURFACE})}});
+        addLayerTexture({{Texture({0,5,TextureType::FILLER})}});
 
 
     }

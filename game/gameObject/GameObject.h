@@ -7,7 +7,7 @@
 #define SDL_GAME_GAME_OBJECT_H
 
 enum class Direction{
-    LEFT,RIGHT,UP,DOWN,NULL_PTR
+    DOWN,LEFT,RIGHT,UP,NULL_PTR
 };
 struct Object{
     int x = 0;

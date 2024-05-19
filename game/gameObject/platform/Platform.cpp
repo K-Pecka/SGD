@@ -45,12 +45,27 @@ void Platform::setTexture(SDL_Renderer* renderer) {
             int texW = 0;
             int texH = 0;
             SDL_QueryTexture(layer.layerTextures.sdl_texture, NULL, NULL, &texW, &texH);
-            for (int yy = y; yy < y + height; yy += texH) {
+            if(layer.layerTextures.textureType == TextureType::GRASS)
+            {
                 for (int xx = x; xx < x + width; xx += texW) {
-                    SDL_Rect dstRect = {xx+layer.getOffsetX(), yy+layer.getOffsetY(), texW, texH};
+                    SDL_Rect dstRect;
+                    if(xx%3 == 0)
+                    {
+                        dstRect = {xx+layer.getOffsetX(), y+layer.getOffsetY(), texW, texH};
+                    }
                     SDL_RenderCopy(renderer, layer.layerTextures.sdl_texture, NULL, &dstRect);
                 }
             }
+            else
+            {
+                for (int yy = y; yy < y + height; yy += texH) {
+                    for (int xx = x; xx < x + width; xx += texW) {
+                        SDL_Rect dstRect = {xx+layer.getOffsetX(), yy+layer.getOffsetY(), texW, texH};
+                        SDL_RenderCopy(renderer, layer.layerTextures.sdl_texture, NULL, &dstRect);
+                    }
+                }
+            }
+
         }
     }
 }
