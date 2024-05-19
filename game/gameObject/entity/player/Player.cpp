@@ -44,6 +44,5 @@ void Player::setAnimation(SDL_Renderer *renderer) {
             playerAnimation.x=0;
         }
     }
-    std::cout<<frame<<std::endl;
     SDL_RenderCopy(renderer,texture,&playerAnimation,&player);
 }

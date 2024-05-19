@@ -6,7 +6,7 @@
 #include <vector>
 #include <SDL.h>
 enum class TextureType{
-    FILLER,GRASS,METAL,GRASS_SURFACE,HERO,NULL_PTR
+    FILLER,GRASS,METAL,GRASS_SURFACE,HERO,MONSTER,NULL_PTR
 };
 struct TextureConfig{
     int offsetX = 0 ;

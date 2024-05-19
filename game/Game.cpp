@@ -29,9 +29,13 @@ void Game::setPlatform(){
 }
 GameObject * Game::checkCollisions(const Player& player) {
     const GameObject& playerObject = player;
-    for (const auto& gameObject : platforms) {
-        if (playerObject.checkCollision(gameObject)) {
-            return (GameObject *) &gameObject;
+    for (Platform platform : platforms) {
+        if (playerObject.checkCollision(platform)) {
+            if(platform.getPlatformType() == PlatformType::GOAL)
+            {
+                std::cout<<"Udalo sie dostac na sam szczyt!"<<std::endl;
+            }
+            return (GameObject *) &platform;
         }
     }
     for (const auto& gameObject : walls) {
@@ -62,7 +66,6 @@ void Game::heroMove(int dx, int dy, Direction lastDirection) {
 
     Player playerCollision({heroNextX, heroNextY, getHero().getWidth(), getHero().getHeight()});
     GameObject* collisionObject = Game::checkCollisions(playerCollision);
-
     if (collisionObject) {
         if (collisionObject->isMovable()) {
             collisionObject->move(getHero().getDirection(), dx, dd);
@@ -97,15 +100,26 @@ void Game::heroMove(int dx, int dy, Direction lastDirection) {
             getHero().fall();
         }
     }
+    else{
+        getHero().setDirection(Direction::DOWN);
+    }
 }
-void Game::updateMonster()
+void Game::updateMonster(SDL_Renderer* renderer)
 {
+
         for (auto &monster : monsters) {
-            if (monster.getX() <= monster.getMonsterConfig().min_X || monster.getX() >= monster.getMonsterConfig().max_X) {
-               monster.changeDirection();
+
+                if (monster.getX() <= monster.getMonsterConfig().min_X ||
+                    monster.getX() >= monster.getMonsterConfig().max_X) {
+                    monster.changeDirection();
+                }
+                monster.update(renderer);
+                if(monster.getMonsterConfig().frame==5) {
+                    monster.move();
+                    monster.addFrame(0);
+                }
+                monster.addFrame();
             }
-            monster.move();
-        }
 }
 void Game::setEntity() {
     setMonster();
@@ -120,12 +134,12 @@ int randomInt(int min, int max)
 void Game::setMonster() {
     monsters = {
             Monster({
-                {70,90,30,40},
+                {70,95,30,40},
                 {205,205,205},
                 {9,0}},
                     {70,250,-1}),
             Monster({
-                            {510,260,30,40},
+                            {510,265,30,40},
                             {205,205,205},
                             {9,0}},
                     {510,690,-1}),
@@ -135,8 +149,8 @@ void Game::setMonster() {
         monster.move(xMove);
     }
 }
-void Game::updateEntity() {
-    updateMonster();
+void Game::updateEntity(SDL_Renderer* renderer) {
+    updateMonster(renderer);
 }
 
 void Game::entityRender(SDL_Renderer* renderer) {

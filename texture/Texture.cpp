@@ -12,6 +12,8 @@ char * Texture::getTextureTypeSrc(TextureType type)
             return "../asset/cobelstone.bmp";
         case TextureType::HERO:
             return "../asset/hero.png";
+        case TextureType::MONSTER:
+            return "../asset/hero.png";
         case TextureType::NULL_PTR:
         default:
             return "../asset/cobelstone.bmp";

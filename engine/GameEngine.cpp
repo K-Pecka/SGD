@@ -102,19 +102,22 @@ void GameEngine::run()
                 lastDirection = checkDirection(event.key.keysym.sym, lastDirection);
             }
         }
+        SDL_RenderClear(Renderer);
+        renderBackground();
         frame++;
 
-        if(frame % 5 == 0) game.updateEntity();
+        game.updateEntity(Renderer);
 
+        if(keys[SDLK_TAB]) {
+            game.getHero().setSpeed({5,-10,true});
+            game.getHero().move(40,240);
+        }
         if (keys[SDLK_LEFT]) dx -= game.getHero().getSpeed().vx;
         if (keys[SDLK_RIGHT]) dx += game.getHero().getSpeed().vx;
 
-        SDL_RenderClear(Renderer);
-        renderBackground();
 
         game.getHero().update(Renderer);
         game.heroMove(dx, 0, lastDirection);
-        game.entityRender(Renderer);
 
         Game::renderGameObjects(Renderer);
         SDL_RenderPresent(Renderer);

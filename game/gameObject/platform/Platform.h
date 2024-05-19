@@ -1,11 +1,11 @@
 #ifndef SDL_GAME_PLATFORM_H
 #define SDL_GAME_PLATFORM_H
-
+#include <random>
 #include <SDL_image.h>
 #include "../../../texture/Texture.h"
 #include "../GameObject.h"
 enum class PlatformType {
-    FILLER, GRASS, METAL, NULL_PTR
+    FILLER, GRASS, METAL,GOAL, NULL_PTR
 };
 struct ObjectConfig{
     Object size = {50,10};
@@ -29,7 +29,7 @@ public:
 
 
     }
-
+    PlatformType getPlatformType(){return platformType;}
     static RGBa getPlatformColor(PlatformType platformType);
 
     void setTexture(SDL_Renderer* renderer);

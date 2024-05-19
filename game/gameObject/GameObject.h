@@ -5,7 +5,7 @@
 
 #ifndef SDL_GAME_GAME_OBJECT_H
 #define SDL_GAME_GAME_OBJECT_H
-
+#include <SDL_image.h>
 enum class Direction{
     DOWN,LEFT,RIGHT,UP,NULL_PTR
 };

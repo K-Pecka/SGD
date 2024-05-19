@@ -29,7 +29,6 @@ SDL_Texture* loadTexture(const char* file, SDL_Renderer* renderer) {
     SDL_FreeSurface(tempSurface);
     return texture;
 }
-
 void Platform::setTexture(SDL_Renderer* renderer) {
     for (auto& textureObj : textures) {
         textureObj.setSDLTexture(loadTexture(textureObj.getTexture(), renderer));
@@ -44,10 +43,12 @@ void Platform::setTexture(SDL_Renderer* renderer) {
         if (layer.layerTextures.sdl_texture != nullptr) {
             int texW = 0;
             int texH = 0;
+
             SDL_QueryTexture(layer.layerTextures.sdl_texture, NULL, NULL, &texW, &texH);
             if(layer.layerTextures.textureType == TextureType::GRASS)
             {
                 for (int xx = x; xx < x + width; xx += texW) {
+
                     SDL_Rect dstRect;
                     if(xx%3 == 0)
                     {
@@ -69,6 +70,4 @@ void Platform::setTexture(SDL_Renderer* renderer) {
         }
     }
 }
-void Platform::renderTexture(SDL_Renderer* renderer) const {
-
-}
+void Platform::renderTexture(SDL_Renderer* renderer) const {}
